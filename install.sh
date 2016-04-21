@@ -17,8 +17,10 @@ then
 fi
 
 sdb root on
+sdb shell mount -o rw,remount /
 sdb shell mkdir -p /data/
 sdb push ${KERNEL_MODULE_FILE} /data/
 sdb push ${SERVICE_FILE} ${PATH_SYSTEMD}/system/
 sdb shell ln -s ${PATH_SYSTEMD}/system/${SERVICE_FILE} ${PATH_SYSTEMD}/system/graphical.target.wants/${SERVICE_FILE}
+sdb shell sync
 echo "Install completed. Reboot target device to use this module."
